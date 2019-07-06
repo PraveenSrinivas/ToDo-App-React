@@ -11,13 +11,13 @@ class MainContainerComponent extends Component {
       index: 0
     },
     notes: [
-      { title: '1', content: 'ljadskbksjdbc', status: 'todo' },
-      { title: '2', content: 'lkajs dbckadjfv', status: 'in-progress' },
-      { title: '3', content: 'ljasdbvljb  adsv', status: 'todo' },
-      { title: '4', content: 'ljadskbksjdbc', status: 'todo' },
-      { title: '5', content: 'lkajsdbck adjfv', status: 'done' },
-      { title: '6', content: 'ljasdbvljbadsv', status: 'todo' },
-      { title: '7', content: 'ljasdbvljbadsv', status: 'done' }
+      // { title: '1', content: 'ljadskbksjdbc', status: 'todo' },
+      // { title: '2', content: 'lkajs dbckadjfv', status: 'in-progress' },
+      // { title: '3', content: 'ljasdbvljb  adsv', status: 'todo' },
+      // { title: '4', content: 'ljadskbksjdbc', status: 'todo' },
+      // { title: '5', content: 'lkajsdbck adjfv', status: 'done' },
+      // { title: '6', content: 'ljasdbvljbadsv', status: 'todo' },
+      // { title: '7', content: 'ljasdbvljbadsv', status: 'done' }
     ]
   };
 
