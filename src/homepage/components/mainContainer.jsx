@@ -37,7 +37,7 @@ class MainContainerComponent extends Component {
     } else if (mode === 'edit') {
       this.setState({
         addOrEditNoteModalData: {
-          noteForm: this.state.notes[index],
+          noteForm: { ...this.state.notes[index] },
           mode: mode,
           index: index
         }
