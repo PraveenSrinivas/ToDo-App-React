@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 
 class AddOrEditNoteModalComponent extends Component {
   state = {
-    noteForm: this.props.addOrEditNoteModalData.noteForm,
-    mode: this.props.addOrEditNoteModalData.mode,
-    index: this.props.addOrEditNoteModalData.index
+    noteForm: { title: '', content: '', status: 'todo' },
+    mode: 'add',
+    index: 0
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      noteForm: this.props.addOrEditNoteModalData.noteForm,
-      mode: this.props.addOrEditNoteModalData.mode,
-      index: this.props.addOrEditNoteModalData.index
-    };
+  componentDidMount(props) {
+    if (props) {
+      this.setState({
+        noteForm: props.addOrEditNoteModalData.noteForm,
+        mode: props.addOrEditNoteModalData.mode,
+        index: props.addOrEditNoteModalData.index
+      });
+    }
   }
 
   componentDidUpdate(prevProps) {

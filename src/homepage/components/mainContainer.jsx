@@ -29,7 +29,11 @@ class MainContainerComponent extends Component {
 
   addOrEditNote = (mode, index) => {
     if (mode === 'add') {
-      this.setState({ addOrEditNoteModalData: this.createNoteDefaultData });
+      this.setState({
+        addOrEditNoteModalData: JSON.parse(
+          JSON.stringify(this.createNoteDefaultData)
+        )
+      });
     } else if (mode === 'edit') {
       this.setState({
         addOrEditNoteModalData: {
