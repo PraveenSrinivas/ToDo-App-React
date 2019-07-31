@@ -2,64 +2,54 @@ import React, { Component } from 'react';
 import NoteComponent from './note';
 import * as $ from 'jquery';
 import AddOrEditNoteModalComponent from './addOrEditNoteModal';
+import { GetRawObject } from '../../utilities/helper';
 
 class MainContainerComponent extends Component {
-  state = {
-    addOrEditNoteModalData: {
-      noteForm: { title: '', content: '', status: 'todo' },
-      mode: 'add',
-      index: 0
-    },
-    notes: [
-      // { title: '1', content: 'ljadskbksjdbc', status: 'todo' },
-      // { title: '2', content: 'lkajs dbckadjfv', status: 'in-progress' },
-      // { title: '3', content: 'ljasdbvljb  adsv', status: 'todo' },
-      // { title: '4', content: 'ljadskbksjdbc', status: 'todo' },
-      // { title: '5', content: 'lkajsdbck adjfv', status: 'done' },
-      // { title: '6', content: 'ljasdbvljbadsv', status: 'todo' },
-      // { title: '7', content: 'ljasdbvljbadsv', status: 'done' }
-    ]
-  };
-
   createNoteDefaultData = {
     noteForm: { title: '', content: '', status: 'todo' },
     mode: 'add',
     index: 0
   };
 
+  state = {
+    addOrEditNoteModalData: GetRawObject(this.createNoteDefaultData),
+    notes: []
+  };
+
+  // Dummy Notes data for testing
+  // { title: '1', content: 'ljadskbksjdbc', status: 'todo' },
+  // { title: '2', content: 'lkajs dbckadjfv', status: 'in-progress' },
+  // { title: '3', content: 'ljasdbvljb  adsv', status: 'todo' },
+  // { title: '4', content: 'ljadskbksjdbc', status: 'todo' },
+  // { title: '5', content: 'lkajsdbck adjfv', status: 'done' },
+  // { title: '6', content: 'ljasdbvljbadsv', status: 'todo' },
+  // { title: '7', content: 'ljasdbvljbadsv', status: 'done' }
+
   addOrEditNote = (mode, index) => {
-    if (mode === 'add') {
-      this.setState({
-        addOrEditNoteModalData: JSON.parse(
-          JSON.stringify(this.createNoteDefaultData)
-        )
-      });
-    } else if (mode === 'edit') {
-      this.setState({
-        addOrEditNoteModalData: {
-          noteForm: { ...this.state.notes[index] },
-          mode: mode,
-          index: index
-        }
-      });
-    } else {
-      alert('Something went wrong');
-    }
+    mode === 'add'
+      ? this.setState({
+          addOrEditNoteModalData: GetRawObject(this.createNoteDefaultData)
+        })
+      : mode === 'edit'
+      ? this.setState({
+          addOrEditNoteModalData: {
+            noteForm: GetRawObject(this.state.notes[index]),
+            mode: mode,
+            index: index
+          }
+        })
+      : alert('Something went wrong');
     $('#createNoteModal').modal('show');
   };
 
   confirmAddOrEditNote = addOrEditNoteModalData => {
-    if (addOrEditNoteModalData.mode === 'add') {
-      const notes = this.state.notes;
-      notes.push(addOrEditNoteModalData.noteForm);
-      this.setState({ notes });
-    } else if (addOrEditNoteModalData.mode === 'edit') {
-      const notes = this.state.notes;
-      notes[addOrEditNoteModalData.index] = addOrEditNoteModalData.noteForm;
-      this.setState({ notes });
-    } else {
-      alert('Something went wrong');
-    }
+    const notes = this.state.notes;
+    addOrEditNoteModalData.mode === 'add'
+      ? notes.push(addOrEditNoteModalData.noteForm)
+      : addOrEditNoteModalData.mode === 'edit'
+      ? (notes[addOrEditNoteModalData.index] = addOrEditNoteModalData.noteForm)
+      : alert('Mode mismatch');
+    this.setState({ notes });
   };
 
   clearAllNotes = () => {

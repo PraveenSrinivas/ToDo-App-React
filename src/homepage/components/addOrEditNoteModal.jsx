@@ -42,21 +42,9 @@ class AddOrEditNoteModalComponent extends Component {
     }
   };
 
-  handleCreateNoteTitle = event => {
+  handleCreateNoteForm = event => {
     const noteForm = this.state.noteForm;
-    noteForm.title = event.target.value;
-    this.setState({ noteForm });
-  };
-
-  handleCreateNoteContent = event => {
-    const noteForm = this.state.noteForm;
-    noteForm.content = event.target.value;
-    this.setState({ noteForm });
-  };
-
-  handleCreateNoteStatus = event => {
-    const noteForm = this.state.noteForm;
-    noteForm.status = event.target.value;
+    noteForm[event.target.name] = event.target.value;
     this.setState({ noteForm });
   };
 
@@ -81,44 +69,50 @@ class AddOrEditNoteModalComponent extends Component {
                 className="close"
                 data-dismiss="modal"
                 aria-label="Close"
-                onClick={this.clearNoteForm}
               >
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div className="modal-body">
-              <form>
+              <form
+                onSubmit={event => {
+                  event.preventDefault();
+                }}
+              >
                 <div className="form-group">
                   <label htmlFor="create-note-title">Note Title</label>
                   <input
                     type="text"
+                    name="title"
                     className="form-control"
                     id="create-note-title"
                     placeholder="Enter Note Title"
                     value={this.state.noteForm.title}
-                    onChange={this.handleCreateNoteTitle}
+                    onChange={this.handleCreateNoteForm}
                   />
                 </div>
                 <div className="form-group">
                   <label htmlFor="create-note-content">Note Content</label>
                   <textarea
                     type="text"
+                    name="content"
                     className="form-control"
                     id="create-note-content"
                     placeholder="Enter Note Content"
                     value={this.state.noteForm.content}
-                    onChange={this.handleCreateNoteContent}
+                    onChange={this.handleCreateNoteForm}
                   />
                 </div>
 
                 <div className="custom-control custom-radio">
                   <input
                     type="radio"
+                    name="status"
                     id="todo"
                     value="todo"
                     className="custom-control-input"
                     checked={this.state.noteForm.status === 'todo'}
-                    onChange={this.handleCreateNoteStatus}
+                    onChange={this.handleCreateNoteForm}
                   />
                   <label className="custom-control-label" htmlFor="todo">
                     ToDo
@@ -127,11 +121,12 @@ class AddOrEditNoteModalComponent extends Component {
                 <div className="custom-control custom-radio">
                   <input
                     type="radio"
+                    name="status"
                     id="in-progress"
                     value="in-progress"
                     className="custom-control-input"
                     checked={this.state.noteForm.status === 'in-progress'}
-                    onChange={this.handleCreateNoteStatus}
+                    onChange={this.handleCreateNoteForm}
                   />
                   <label className="custom-control-label" htmlFor="in-progress">
                     In - Progress
@@ -140,11 +135,12 @@ class AddOrEditNoteModalComponent extends Component {
                 <div className="custom-control custom-radio">
                   <input
                     type="radio"
+                    name="status"
                     id="done"
                     value="done"
                     className="custom-control-input"
                     checked={this.state.noteForm.status === 'done'}
-                    onChange={this.handleCreateNoteStatus}
+                    onChange={this.handleCreateNoteForm}
                   />
                   <label className="custom-control-label" htmlFor="done">
                     Done
@@ -157,7 +153,6 @@ class AddOrEditNoteModalComponent extends Component {
                 type="button"
                 className="btn btn-secondary"
                 data-dismiss="modal"
-                onClick={this.clearNoteForm}
               >
                 Close
               </button>
