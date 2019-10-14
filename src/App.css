@@ -106,6 +106,7 @@
 
 .card-body {
     height: 250px;
+    overflow: auto;
 }
 
 .card-header {
